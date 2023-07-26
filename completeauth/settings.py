@@ -135,3 +135,9 @@ EMAIL_HOST_USER = "sumukh.robosoft@gmail.com"
 EMAIL_HOST_PASSWORD = "bdyaenxdwwtpxivf"
 
 
+
+VONAGE_API_KEY = "00e8fe4b"
+VONAGE_API_SECRET = "sSwQVuwBAmISvfO2"
+VONAGE_PHONE_NUMBER = '+919448745406'
+
+
