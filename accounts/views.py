@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserSerializer,VerifyOtpSerializer,VerifysmsOtpSerializer,LoginSerializer
+from .serializers import UserSerializer,VerifyOtpSerializer,VerifysmsOtpSerializer,UploadedFileSerializer,LoginSerializer
 from .models import User,Refresh_Token
 # from .emails import send_otp_via_email,send_otp_sms
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -116,3 +116,16 @@ class LoginAPI(APIView):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         })
+    
+
+
+
+class UploadFileView(APIView):
+    def post(self, request):
+        serializer = UploadedFileSerializer(data=request.data, context={'request': request})
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors)

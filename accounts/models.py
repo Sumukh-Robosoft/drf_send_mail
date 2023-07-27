@@ -33,3 +33,11 @@ class Refresh_Token(models.Model):
     refreshToken = models.CharField(max_length=500,unique=True)
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True) 
+
+
+class UploadedFile(models.Model):
+    file_url = models.URLField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.file_url

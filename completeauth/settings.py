@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'accounts',
-    "rest_framework_simplejwt"
+    "rest_framework_simplejwt",
+    'cloudinary',
+    'corsheaders',
 
 ]
 
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'completeauth.urls'
@@ -81,8 +84,19 @@ WSGI_APPLICATION = 'completeauth.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME':'django',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'password',
+
+        'HOST': 'localhost',
+
+        'PORT': '5433',
+
     }
 }
 
@@ -178,4 +192,11 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 
+}
+
+
+CLOUDINARY = {
+    'cloud_name': 'dx8ktxwtg',
+    'api_key': '171174414215774',
+    'api_secret': '54UUuybC_ebDUamnMR2PJMYg-HE',
 }

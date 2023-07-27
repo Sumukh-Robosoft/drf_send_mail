@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import User,Refresh_Token
+from .models import User,UploadedFile
+from cloudinary.uploader import upload
 
 class UserSerializer(serializers.Serializer):
     email=serializers.EmailField()
@@ -34,4 +35,13 @@ class LoginSerializer(serializers.Serializer):
 #         token=RefreshToken.create(user=validate_data['user'],refreshToken=validate_data['refresh'])
 #         token.save()
 #         return validate_data
+class UploadedFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UploadedFile
+        fields = ('id', 'file_url', 'created_at')
+        read_only_fields = ('id', 'file_url', 'created_at')
 
+    def create(self, validated_data):
+        file = self.context['request'].data.get('file')
+        upload_result = upload(file, resource_type="auto")
+        return UploadedFile.objects.create(file_url=upload_result['url'])
