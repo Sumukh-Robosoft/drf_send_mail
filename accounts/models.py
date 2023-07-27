@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser,BaseUserManager
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -28,3 +28,8 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
+class Refresh_Token(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user')
+    refreshToken = models.CharField(max_length=500,unique=True)
+    created_at = models.DateTimeField(auto_now_add=True) 
+    updated_at = models.DateTimeField(auto_now=True) 
